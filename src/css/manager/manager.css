@@ -1,0 +1,293 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Login page css */
+.manager-login-wrapper{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(95.32deg, #FF9C41 0%, #D5161B 100%);
+}
+.manager-login-wrapper form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border-radius: 10px;
+    background: #f2f2f2;
+    height: 30vh;
+    width: 30%;
+    gap: .5rem;
+}
+.manager-login-wrapper form input:focus{
+    outline:2px solid #FF9C41;
+    border: none;
+}
+
+
+/* Manager layout css */
+  
+.manager-main-content {
+    width: 80%;
+    padding: 20px;
+    overflow-y: auto;
+}
+.manager-layout {
+    display: flex;
+    height: 100vh;
+}
+
+/* Table card css */
+.dashboard-wrapper .table-grid{
+    flex-wrap: wrap;
+    display: flex;
+    gap: 20px;
+    cursor: pointer;
+} 
+.dashboard-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}       
+.table-card-wrap{
+    border-radius: 10px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    background: rgba(255, 255, 255, 1);
+    height: 200px;
+    width: 350px;
+    padding: 10px 10px 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    transition: all .5s ease-in-out;
+}
+.table-card-wrap.active:hover,.table-card-wrap:hover{
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+}
+.table-card-wrap.active {
+    border: 2px solid rgba(71, 169, 53, 0.6);
+    background: rgba(255, 255, 255, 1);
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+
+.table-card-wrap.reject {
+    border: 2px solid rgba(238, 89, 89, 1);
+    background: rgba(255, 228, 228, 0.73);
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+  
+
+.table-details-1{
+    display: flex;
+    gap: 10px;
+}
+.table-details-2,.table-details-1 p{
+    display: flex;
+    flex-direction: column;
+}
+.table-details-1 p{
+    align-items: center;
+}
+.table-card-heading{
+    color: rgba(51, 51, 51, 0.6);
+    font-size: .8rem;
+}
+.table-card-value{
+    color: rgba(51, 51, 51, 0.8);
+    font-size: .85rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.dashboard-wrapper .tabs{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.dashboard-wrapper .tabs .tab-btn {
+    background: linear-gradient(95.32deg, #FF9C41 0%, #D5161B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+.dashboard-main-heading{
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-left: 5px solid #D5161B;
+    color: rgba(51, 51, 51, 1);
+    padding-left: 10px;
+    margin-bottom: 1rem;
+}
+.dashboard-wrapper .tabs .tab-btn:hover,.dashboard-wrapper .tabs .tab-btn.active-tab {
+    font-weight: 600;
+    text-decoration: underline;
+    font-size: larger;
+}
+.dashboard-main-sub-heading{
+    color: rgba(51, 51, 51, 0.6);
+    font-weight: 500;
+}
+.dashboard-analytics-wrapper{
+    /* display: flex; */
+    /* align-items: center; */
+    gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+.total-order-card{
+    border-radius: 10px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    background: rgba(255, 255, 255, 1);
+    height: 200px;
+    width: 98%;
+    padding: 10px 10px 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    transition: all .5s ease-in-out;
+    color: rgba(51, 51, 51, 1);
+}
+.most-ordered-item-card{
+    border-radius: 10px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    background: linear-gradient(95.32deg, #FF9C41 0%, #D5161B 100%);
+    height: 200px;
+    width: 98%;
+    padding: 10px 10px 10px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    transition: all .5s ease-in-out;
+    color: #fff !important;
+}
+.most-ordered-item-card .dashboard-main-sub-heading{
+    color: rgba(255, 255, 255, 1);
+}
+.most-ordered-item-card .table-card-value{
+    color: rgba(255, 255, 255, 1);
+    font-weight: 400;
+}
+.total-order-card .table-card-value{
+    color: rgba(51, 51, 51, 0.6);
+    font-weight: 400;
+}
+.most-ordered-item-name{
+    font-size: 4rem;
+}
+
+
+
+/* pending / ready / served btn design */
+.status-update-radio-lable input[type="radio"]{
+    display: none;
+}
+.status-update-radio-lable {
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: linear-gradient(95.32deg, rgba(255, 156, 65, 0.1) 0%, rgba(213, 22, 27, 0.1) 100%);
+    cursor: pointer;
+    transition: background-color 0.3s, border 0.3s;
+    margin: 5px;
+    color: rgba(51, 51, 51, 0.8);
+    font-size: .8rem;
+  }
+  .status-update-radio-lable.checked {
+    border: 2px solid rgb(241 144 147);
+    color: rgba(213, 22, 27, 1);
+  }
+  .modal-field-wrap .table-card-value{
+    margin: 10px 0px;
+  }
+  .order-status-modal-title{
+    color: (51, 51, 51, 0.8);
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  .modal-content button{
+    margin-top: 20px;
+  }
+
+
+  /* Order POpUp */
+  /* Example CSS for the popup */
+.order-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  .order-popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+  }
+  
+  .order-popup-actions {
+    margin-top: 20px;
+  }
+  
+  .accept-btn, .reject-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .accept-btn {
+    background-color: green;
+    color: white;
+  }
+  
+  .reject-btn {
+    background-color: red;
+    color: white;
+  }
+  
+  .close-btn {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: gray;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .order-popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    animation: popIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes popIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  
