@@ -64,7 +64,7 @@ function App() {
           <Route path="/u/select-table" element={<SelectTable />} />
           <Route path="/u/menu" element={<ProtectedRoute><Menu /></ProtectedRoute>} />
           <Route path="/u/payment" element={<PaymentButton />} />
-          <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+          <Route path="/u/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
           <Route path="/u/order-history" element={<ProtectedRoute><OrderHistory /></ProtectedRoute>} />
           <Route path="/u/payment-status/:status" element={<PaymentStatusPage />} />
           <Route path="/u/track-order/:order_id" element={<ProtectedRoute><TrackOrder /></ProtectedRoute>} />
