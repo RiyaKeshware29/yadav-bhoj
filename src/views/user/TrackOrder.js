@@ -14,11 +14,11 @@ const TrackOrder = () => {
   const navigate = useNavigate();
 
   const handleGoToPayment = () => {
-    navigate(`/u/order-history/${user.uid}`);
+    navigate(`/u/order-history`);
   };
 
   const handleGoToMenu = () => {
-    navigate(`/menu/${order_id}`);
+    navigate(`/u/menu`);
   };
 
   useEffect(() => {

@@ -41,8 +41,8 @@ const FooterMenu = () => {
       </div>
 
       <div
-        className={`footer-menu-icon ${currentPath === '/cart' ? 'active' : ''}`}
-        onClick={() => handleNav('/cart')}
+        className={`footer-menu-icon ${currentPath === '/u/cart' ? 'active' : ''}`}
+        onClick={() => handleNav('/u/cart')}
       >
         <img src={CartIcon} alt="Cart" />
         <span>Cart</span>

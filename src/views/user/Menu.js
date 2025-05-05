@@ -61,7 +61,7 @@ const Menu = () => {
         quantity: selectedItem.quantity,
       };
     });
-    navigate('/cart', { state: { items: enrichedItems } });
+    navigate('/u/cart', { state: { items: enrichedItems } });
   };
 
   const filteredItems =
