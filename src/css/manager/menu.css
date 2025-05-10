@@ -175,3 +175,9 @@
   float: right;
   margin-right: 110px;
 }
+
+.tab-actions-wrapper .add-item-btn-wrapper{
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+}

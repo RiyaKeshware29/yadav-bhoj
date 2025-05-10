@@ -11,13 +11,11 @@ const Menu = () => {
   const containerRef = useRef(null);
   const navigate = useNavigate();
   const { user, updateUser } = useUser();
-
   const [categories, setCategories] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   const selectedItems = user.selectedItems || [];
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -76,7 +74,7 @@ const Menu = () => {
         <SearchBar containerRef={containerRef} placeholder="Search..."
           displayType="block" />
       </div>
-
+      <div className="subheading" style={{marginLeft:'10px'}}>You're seated in : Table No. - {user.tableNumber}</div>
       <div className="menu-category-accordian">
         <div className="category-scroll">
           <CategoryButton

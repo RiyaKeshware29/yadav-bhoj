@@ -11,6 +11,7 @@ const Menu = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
   const [menuItems, setMenuItems] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [isAddItem, setIsAddItem] = useState(true);
   const [formData, setFormData] = useState({
@@ -25,29 +26,36 @@ const Menu = () => {
   const [activeTab, setActiveTab] = useState('items');
   const containerRef = useRef(null);
 
+  const fetchMenu = async (categoryId = '') => {
+    try {
+      const url = categoryId ? `${apiUrl}category-item/${categoryId}` : `${apiUrl}item`;
+      const res = await axios.get(url);
+      setMenuItems(res.data);
+    } catch (err) {
+      setMenuItems([]);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const res = await axios.get(`${apiUrl}category`);
+      setCategories(res.data);
+    } catch (err) {
+      console.error('Failed to fetch categories:', err);
+    }
+  };
+
   useEffect(() => {
-    const fetchMenu = async () => {
-      try {
-        const res = await axios.get(`${apiUrl}item`);
-        setMenuItems(res.data);
-      } catch (err) {
-        console.error('Failed to fetch menu:', err);
-      }
-    };
-
-    const fetchCategories = async () => {
-      try {
-        const res = await axios.get(`${apiUrl}category`);
-        setCategories(res.data);
-      } catch (err) {
-        console.error('Failed to fetch categories:', err);
-      }
-    };
-
     fetchMenu();
     fetchCategories();
     // eslint-disable-next-line
   }, []);
+
+  const handleCategoryFilterChange = (e) => {
+    const value = e.target.value;
+    setSelectedCategory(value);
+    fetchMenu(value);
+  };
 
   const handleEdit = async (item_id) => {
     try {
@@ -57,7 +65,6 @@ const Menu = () => {
       setIsAddItem(true);
       setShowModal(true);
       toast.success('Item Edited successfully');
-
     } catch (err) {
       console.error('Failed to fetch item:', err);
       toast.error('Failed to fetch item');
@@ -83,7 +90,6 @@ const Menu = () => {
       setIsAddItem(false);
       setShowModal(true);
       toast.success('Category Edited successfully');
-
     } catch (err) {
       console.error('Failed to fetch category:', err);
       toast.error('Failed to fetch category');
@@ -189,7 +195,22 @@ const Menu = () => {
           <Button text={'Add New Category'} width="20%" onClick={() => { setIsAddItem(false); setCurrentItemId(null); setShowModal(true); }} />
         )}
         {activeTab === 'items' && (
-          <Button text={'Add New Item'} width="20%" onClick={() => { setIsAddItem(true); setCurrentItemId(null); setShowModal(true); }} />
+          <div className='add-item-btn-wrapper'>
+             <select
+              value={selectedCategory}
+              onChange={handleCategoryFilterChange}
+              className="input"
+              style={{ marginLeft: '1rem', padding: '0.5rem', width: '20%' }}
+            >
+              <option value="">All Category</option>
+              {categories.map(category => (
+                <option key={category.category_id} value={category.category_id}>
+                  {category.category_name}
+                </option>
+              ))}
+            </select>
+            <Button text={'Add New Item'} width="20%" onClick={() => { setIsAddItem(true); setCurrentItemId(null); setShowModal(true); }} />
+          </div>
         )}
       </div>
 
@@ -227,11 +248,10 @@ const Menu = () => {
                 <div>{item.category_name}</div>
                 <div>₹{item.item_price}</div>
                 <div className='availability-toggle'>
-                    <span width="10px" className={item.available ? 'option  available' : 'option option unavailable'}>
-                      {item.available ? 'Yes' : 'No'}
-                    </span>
+                  <span className={item.available ? 'option available' : 'option option unavailable'}>
+                    {item.available ? 'Yes' : 'No'}
+                  </span>
                 </div>
-              
                 <div>{item.item_desc}</div>
                 <div className="action-icons">
                   <img src={EditIcon} alt="edit" className="icon" onClick={() => handleEdit(item.item_id)} />
@@ -244,18 +264,8 @@ const Menu = () => {
               <div className="menu-row" key={category.category_id}>
                 <div>{category.category_name}</div>
                 <div className="action-icons">
-                  <img
-                    src={EditIcon}
-                    alt="edit"
-                    className="icon"
-                    onClick={() => handleCategoryEdit(category.category_id)}
-                  />
-                  <img
-                    src={DeleteIcon}
-                    alt="delete"
-                    className="icon"
-                    onClick={() => handleCategoryDelete(category.category_id)}
-                  />
+                  <img src={EditIcon} alt="edit" className="icon" onClick={() => handleCategoryEdit(category.category_id)} />
+                  <img src={DeleteIcon} alt="delete" className="icon" onClick={() => handleCategoryDelete(category.category_id)} />
                 </div>
               </div>
             ))}
@@ -278,7 +288,6 @@ const Menu = () => {
                   value={formData.item_name}
                 />
               </div>
-
               <div className="modal-field-wrap">
                 <label className="table-card-value">Item Price</label>
                 <input
@@ -290,7 +299,6 @@ const Menu = () => {
                   value={formData.item_price}
                 />
               </div>
-
               <div className="modal-field-wrap">
                 <label className="table-card-value">Item Category</label>
                 <select
@@ -308,7 +316,6 @@ const Menu = () => {
                   ))}
                 </select>
               </div>
-
               <div className="modal-field-wrap">
                 <label className="table-card-value">Item Description</label>
                 <input
@@ -320,9 +327,6 @@ const Menu = () => {
                   value={formData.item_desc}
                 />
               </div>
-
-
-              
               <div className="modal-field-wrap avail-gap">
                 <label className="table-card-value">Item Availability</label>
                 <div className="availability-toggle">
@@ -364,8 +368,6 @@ const Menu = () => {
         </div>
         <Button width="30%" text="Submit" onClick={handleSubmit} />
       </Modal>
-
-
     </div>
   );
 };

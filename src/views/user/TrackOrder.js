@@ -55,7 +55,7 @@ const TrackOrder = () => {
             <p className="subheading">Track order progress</p>
           </div>
         </div>
-
+        <div className="subheading" style={{marginLeft:'10px'}}>You're seated in : Table No. - {user.tableNumber}</div>
         {orderItems.length === 0 ? (
           <p className="center-text">Loading or no items found.</p>
         ) : (

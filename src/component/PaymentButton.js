@@ -1,4 +1,5 @@
 import React from "react";
+import { toast, ToastContainer } from 'react-toastify';
 
 const loadRazorpayScript = () => {
   return new Promise((resolve) => {
@@ -14,7 +15,8 @@ const PaymentButton = () => {
     const handlePayment = async () => {
         const res = await loadRazorpayScript();
         if (!res) {
-          alert("Razorpay SDK failed to load. Are you online?");
+          toast.error("Razorpay SDK failed to load. Are you online?");
+          // alert("Razorpay SDK failed to load. Are you online?");
           return;
         }
       
@@ -26,7 +28,8 @@ const PaymentButton = () => {
           description: "Test Transaction",
           image: "https://yourlogo.png",
           handler: function (response) {
-            alert(`Payment successful. Payment ID: ${response.razorpay_payment_id}`);
+            toast.success(`Payment successful. Payment ID: ${response.razorpay_payment_id}`);
+            // alert(`Payment successful. Payment ID: ${response.razorpay_payment_id}`);
             console.log("Payment Successful:", response);
           },
           prefill: {
@@ -46,7 +49,8 @@ const PaymentButton = () => {
       
         // 👉 Handle payment failure
         rzp.on('payment.failed', function (response) {
-          alert(`Payment failed: ${response.error.description}`);
+          toast.error(`Payment failed: ${response.error.description}`);
+          // alert(`Payment failed: ${response.error.description}`);
           console.error("Payment Failed:", response.error);
         });
       

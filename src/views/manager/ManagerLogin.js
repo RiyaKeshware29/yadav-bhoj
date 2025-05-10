@@ -1,6 +1,7 @@
 import { useManager } from "../../context/ManagerContext";
 import { useNavigate } from "react-router-dom";
 import Button from '../../component/CustomButton';
+import { toast } from 'react-toastify';
 
 function ManagerLogin() {
   const { updateManager } = useManager();  
@@ -22,7 +23,8 @@ function ManagerLogin() {
       });
       navigate("/m/dashboard");
     } else {
-      alert("Invalid credentials");
+      // alert("Invalid credentials");
+      toast.error("Invalid credentials");
     }
   };
 

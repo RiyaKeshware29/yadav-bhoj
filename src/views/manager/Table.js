@@ -113,7 +113,6 @@ const Table = () => {
     return [...Array(TOTAL_TABLES)].map((_, i) => {
       const tableNo = i + 1;
       const info = getTableInfo(tableNo);
-      
       if (activeTab === 'active' && info?.table_activity !== 'active') return null;
       
       const hasRejectedItems = info?.ordered_items?.some(item => item.order_status === 'rejected');
@@ -126,6 +125,10 @@ const Table = () => {
           key={tableNo}
           onClick={handleClick}
         >
+          <div className="table-details-1" style={{justifyContent:'space-between',alignContent:'start'}}>
+            <p><span className="table-card-heading">Order ID</span><span className="table-card-value">{info ? info.last_order_id : "-"}</span></p>
+            <p><span className="table-card-heading">Date</span><span className="table-card-value">{info ? info.date_time : "-"}</span></p>
+          </div>
           <div className="table-details-1">
             <p><span className="table-card-heading">Table</span><span className="table-card-value">{tableNo}</span></p>
             <p><span className="table-card-heading">Status</span><span className="table-card-value">{info ? info.status : "-"}</span></p>
@@ -171,7 +174,7 @@ const Table = () => {
           <div key={`${item.item_id}-${idx}`} className="modal-field-wrap">
             <label className="table-card-value">{item.name} ({item.quantity})</label>
             <div>
-              {['pending', 'ready', 'served'].map((status) => (
+              {['accepted', 'ready', 'served'].map((status) => (
                 <label
                   key={status}
                   className={`status-update-radio-lable ${item.status === status ? 'checked' : ''}`}

@@ -79,15 +79,16 @@ const Cart = () => {
       0
     );
 
+    console.log(user);
     const formData = new FormData();
-    formData.append('uid', user.uid || 'UID2'); 
-    formData.append('table_no', user.tableNo || '4'); 
+    formData.append('uid', user.uid); 
+    formData.append('table_no', user.tableNumber); 
     formData.append('total_price', totalAmount.toString());
     formData.append('items', JSON.stringify(cartItems.map(item => ({
       item_id: item.item_id,
       quantity: item.quantity
     }))));
-
+    console.log(formData)
     try {
       const res = await fetch(`${apiUrl}order`, {
         method: 'POST',
@@ -134,7 +135,7 @@ const Cart = () => {
             <p className="subheading">Review your order</p>
           </div>
         </div>
-
+        <div className="subheading" style={{marginLeft:'10px'}}>You're seated in : Table No. - {user.tableNumber}</div>
         {cartItems.map((item, index) => (
           <CartItem
             key={item.item_id}

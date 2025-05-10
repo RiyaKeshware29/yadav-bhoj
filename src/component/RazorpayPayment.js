@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';  // Import useNavigate for page navigation
 import Button from './CustomButton';
+import { toast, ToastContainer } from 'react-toastify';
 
 const loadRazorpayScript = () => {
   return new Promise((resolve) => {
@@ -19,7 +20,9 @@ const RazorpayPayment = ({ order, onSuccess }) => {
   const handlePayment = async () => {
     const res = await loadRazorpayScript();
     if (!res) {
-      alert("Razorpay SDK failed to load.");
+      // alert("Razorpay SDK failed to load.");          
+      toast.error("Razorpay SDK failed to load.");
+
       return;
     }
 
@@ -30,8 +33,8 @@ const RazorpayPayment = ({ order, onSuccess }) => {
       name: "यादव भोज",
       description: `Payment for Order #${order.order_id}`,
       handler: async function (response) {
-        alert(`Payment successful. Payment ID: ${response.razorpay_payment_id}`);
-
+        // alert(`Payment successful. Payment ID: ${response.razorpay_payment_id}`);
+        toast.success(`Payment successful. Payment ID: ${response.razorpay_payment_id}`);
         try {
           const res = await fetch(`${apiUrl}order-payment/${order.order_id}`, {
             method: 'PATCH',
@@ -69,7 +72,9 @@ const RazorpayPayment = ({ order, onSuccess }) => {
 
     const rzp = new window.Razorpay(options);
     rzp.on("payment.failed", function (response) {
-      alert(`Payment failed: ${response.error.description}`);
+      // alert(`Payment failed: ${response.error.description}`);
+      toast.error(`Payment failed: ${response.error.description}`);
+
       navigate('/u/payment-status/failed');  // Navigate to payment failed page if payment fails
     });
     rzp.open();

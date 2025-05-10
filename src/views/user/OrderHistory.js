@@ -107,6 +107,7 @@ const OrderHistory = () => {
           <p className="subheading">All you've ordered yet.</p>
         </div>
       </div>
+      <div className="subheading" style={{marginLeft:'10px'}}>You're seated in : Table No. - {user.tableNumber}</div>
 
       {/* COMPLETED BUT UNPAID */}
       {ongoing

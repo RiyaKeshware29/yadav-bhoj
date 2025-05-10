@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import OrderPopup from '../../component/managerViewComponents/OrderPopup'; // Import OrderPopup
+// import OrderPopup from '../../component/managerViewComponents/OrderPopup'; // Import OrderPopup
 
 const TOTAL_TABLES = 10;
 
@@ -11,8 +11,8 @@ const Dashboard = () => {
   const [totalOrders, setTotalOrders] = useState(0);
   // eslint-disable-next-line
   const [notifications, setNotifications] = useState([]);
-  const [showPopup, setShowPopup] = useState(false);
-  const [popupOrderId, setPopupOrderId] = useState(null);
+  // const [showPopup, setShowPopup] = useState(false);
+  // const [popupOrderId, setPopupOrderId] = useState(null);
 
   const navigate = useNavigate();
   
@@ -47,25 +47,25 @@ const Dashboard = () => {
   }, []);
 
 
-  useEffect(() => {
-    const handleMessage = (event) => {
-      // console.log('[Dashboard] Message receivedddd:', event.data);
-      const { order_id, action } = event.data.data || {};
+  // useEffect(() => {
+  //   const handleMessage = (event) => {
+  //     // console.log('[Dashboard] Message receivedddd:', event.data);
+  //     const { order_id, action } = event.data.data || {};
   
-      if (action === 'new_order') {
-        setPopupOrderId(order_id);
-        setShowPopup(true);
-      }
-    };
+  //     if (action === 'new_order') {
+  //       setPopupOrderId(order_id);
+  //       setShowPopup(true);
+  //     }
+  //   };
   
-    navigator.serviceWorker?.ready.then(() => {
-      navigator.serviceWorker.addEventListener('message', handleMessage);
-    });
+  //   navigator.serviceWorker?.ready.then(() => {
+  //     navigator.serviceWorker.addEventListener('message', handleMessage);
+  //   });
   
-    return () => {
-      navigator.serviceWorker?.removeEventListener('message', handleMessage);
-    };
-  }, []);
+  //   return () => {
+  //     navigator.serviceWorker?.removeEventListener('message', handleMessage);
+  //   };
+  // }, []);
   
 
   // Helper function to get table info by table number
@@ -167,7 +167,7 @@ const Dashboard = () => {
       <div className="table-grid">
         {renderActiveTables()}
       </div>
-      {showPopup && popupOrderId && (
+      {/* {showPopup && popupOrderId && (
           <OrderPopup
             orderId={popupOrderId}
             onClose={() => {
@@ -175,7 +175,7 @@ const Dashboard = () => {
               setPopupOrderId(null);
             }}
           />
-        )}
+        )} */}
 
     </div>
   );

@@ -37,7 +37,7 @@
     font-size: 1.3rem;
   }
   /* Phone Auth css */
-  .phone-auth{
+  /* .phone-auth{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -45,6 +45,20 @@
     width: 100%;
     height: 100vh;
     background: linear-gradient(95.32deg, #FF9C41 0%, #D5161B 100%);
+  } */
+  .phone-auth {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background-image: 
+        linear-gradient(rgba(255, 156, 65, 0.93), rgba(213, 22, 27, 0.93)),
+        url('../../image/bg-img.png'); /* replace with your actual image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   .phone-bg{
     width: 100%;

@@ -11,13 +11,13 @@ const ManagerLayout = ({ children }) => {
   useEffect(() => {
     const handleMessage = (event) => {
       // FCM payload comes in event.data.data
-      const { action, order_id, table_no } = event.data.data || {};
+      const { action, order_id } = event.data.data || {};
       if (action === "new_order") {
         // show toast
-        toast.info(`📦 New Order #${order_id} from Table ${table_no}`, {
-          position: "top-right",
-          autoClose: 5000,
-        });
+        // toast.info(`📦 New Order #${order_id} from Table ${table_no}`, {
+        //   position: "top-right",
+        //   autoClose: 5000,
+        // });
         // show accept/reject popup
         setPopupOrderId(order_id);
         setShowPopup(true);

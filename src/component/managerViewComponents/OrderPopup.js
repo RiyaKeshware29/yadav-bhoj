@@ -4,7 +4,10 @@ import axios from 'axios';
 
 const OrderPopup = ({ orderId, onClose }) => {
   const apiUrl = process.env.REACT_APP_API_URL;
-  const [loading, setLoading] = useState(false);
+  console.log(apiUrl)
+
+  const [loadingAccept, setLoadingAccept] = useState(false);
+  const [loadingReject, setLoadingReject] = useState(false);
 
   // Optional: ESC key to close
   useEffect(() => {
@@ -18,53 +21,69 @@ const OrderPopup = ({ orderId, onClose }) => {
   const handleAccept = async () => {
     const confirm = window.confirm("Are you sure you want to Accept this order?");
     if (!confirm) return;
-
-    setLoading(true);
+  
+    setLoadingAccept(true);
     try {
       await axios.patch(`${apiUrl}order-status-update?flag=accepted`, {
         order_id: orderId,
       });
       toast.success(`Order ${orderId} accepted!`);
-      onClose();
     } catch (error) {
       toast.error(`Failed to accept order ${orderId}`);
     } finally {
-      setLoading(false);
+      setLoadingAccept(false);
+      onClose(); 
     }
   };
+  
 
   const handleReject = async () => {
     const confirm = window.confirm("Are you sure you want to reject this order?");
     if (!confirm) return;
-
-    setLoading(true);
+  
+    setLoadingReject(true);
     try {
       await axios.patch(`${apiUrl}order-status-update?flag=rejected`, {
         order_id: orderId,
       });
       toast.success(`Order ${orderId} rejected!`);
-      onClose();
     } catch (error) {
       toast.error(`Failed to reject order ${orderId}`);
     } finally {
-      setLoading(false);
+      setLoadingReject(false);
+      onClose(); // Always close, even if it fails
     }
   };
+  
 
   return (
     <div className="order-popup" role="dialog" aria-labelledby="order-dialog-title">
       <div className="order-popup-content">
-        <h2 id="order-dialog-title">Order #{orderId}</h2>
-        <p>Would you like to accept or reject this order?</p>
+        <span id="order-dialog-title">New Order #{orderId}</span><br /><br />
+        <p id="order-dialog-text">Would you like to accept or reject this order?</p>
         <div className="order-popup-actions">
-          <button onClick={handleAccept} className="accept-btn" disabled={loading}>
-            {loading ? '...' : 'Accept'}
+          <button
+            onClick={handleAccept}
+            className="accept-btn option available"
+            disabled={loadingAccept || loadingReject}
+          >
+            {loadingAccept ? 'Processing..' : 'Accept'}
           </button>
-          <button onClick={handleReject} className="reject-btn" disabled={loading}>
-            {loading ? '...' : 'Reject'}
+          <button
+            onClick={handleReject}
+            className="reject-btn option unavailable"
+            disabled={loadingAccept || loadingReject}
+          >
+            {loadingReject ? 'Processing..' : 'Reject'}
           </button>
         </div>
-        <button onClick={onClose} className="close-btn" disabled={loading}>Close</button>
+        <button
+          onClick={onClose}
+          className="close-btn"
+          disabled={loadingAccept || loadingReject}
+        >
+          Close
+        </button>
       </div>
     </div>
   );
